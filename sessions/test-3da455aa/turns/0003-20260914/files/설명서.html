@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>노션 브릿지 코딩 - 사용 설명서</title>
+<style>
+  :root {
+    --accent: #2f6fed;
+    --bg: #f7f8fa;
+    --card: #ffffff;
+    --text: #222;
+    --muted: #666;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.7;
+  }
+  header {
+    background: linear-gradient(135deg, #2f6fed, #6f9dff);
+    color: white;
+    padding: 48px 24px;
+    text-align: center;
+  }
+  header h1 { margin: 0 0 8px; font-size: 28px; }
+  header p { margin: 0; opacity: 0.9; }
+  .container {
+    max-width: 760px;
+    margin: -24px auto 48px;
+    padding: 0 16px;
+  }
+  .card {
+    background: var(--card);
+    border-radius: 14px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.07);
+    padding: 28px 32px;
+    margin-bottom: 20px;
+  }
+  .card h2 {
+    margin-top: 0;
+    font-size: 20px;
+    color: var(--accent);
+    border-bottom: 2px solid #eef2fb;
+    padding-bottom: 10px;
+  }
+  .step {
+    display: flex;
+    gap: 14px;
+    margin: 18px 0;
+    align-items: flex-start;
+  }
+  .step .num {
+    flex-shrink: 0;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: var(--accent);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 14px;
+  }
+  .step .desc { flex: 1; }
+  .step .desc b { color: #222; }
+  code, .cmd {
+    background: #eef1f6;
+    padding: 2px 8px;
+    border-radius: 6px;
+    font-family: "SF Mono", Menlo, monospace;
+    font-size: 13px;
+    color: #b3261e;
+  }
+  pre {
+    background: #1e1e2e;
+    color: #d4d4f5;
+    padding: 16px;
+    border-radius: 10px;
+    overflow-x: auto;
+    font-size: 13px;
+    line-height: 1.5;
+  }
+  .tag {
+    display: inline-block;
+    background: #eaf1ff;
+    color: var(--accent);
+    padding: 3px 10px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    margin-right: 6px;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 12px 0;
+    font-size: 14px;
+  }
+  th, td {
+    text-align: left;
+    padding: 10px 12px;
+    border-bottom: 1px solid #eee;
+  }
+  th { color: var(--muted); font-weight: 600; background: #f5f7fb; }
+  .diagram {
+    background: #0f172a;
+    color: #a5f3fc;
+    padding: 18px;
+    border-radius: 10px;
+    font-family: monospace;
+    font-size: 12.5px;
+    white-space: pre;
+    overflow-x: auto;
+  }
+  .note {
+    background: #fff8e1;
+    border-left: 4px solid #f5b400;
+    padding: 12px 16px;
+    border-radius: 8px;
+    font-size: 14px;
+    margin: 14px 0;
+  }
+  footer {
+    text-align: center;
+    color: var(--muted);
+    font-size: 13px;
+    padding: 24px;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>🏠 노션 브릿지 코딩 사용 설명서</h1>
+  <p>노션 댓글로 집 맥미니의 Claude Code에게 코딩을 시키는 방법</p>
+</header>
+
+<div class="container">
+
+  <div class="card">
+    <h2>📌 한눈에 보기</h2>
+    <p>이 시스템은 <b>노션 페이지의 댓글창을 채팅창처럼</b> 사용해서, 집에 있는 맥미니의 Claude Code(코딩 AI)에게
+    작업을 시키는 도구입니다. 노션 데이터베이스의 각 행(row)이 하나의 "대화 세션"이 되고,
+    그 세션 페이지에 댓글을 달면 15초 안에 맥미니가 읽어서 작업을 시작합니다.</p>
+    <div class="diagram">
+ Notion (무료 플랜)                               맥미니
+┌──────────────────────────────┐   15초 폴링   ┌─────────────────────────────────┐
+│ Claude Code DB  = 세션 목록   │&lt;────────────►│ nbc bridge (상시 실행)            │
+│  🟢/🟠/🔴 아이콘 = 상태 표시    │               │  1. 새 댓글 감지 (허용된 사람만)   │
+│                              │               │  2. /명령 은 로컬 처리 (토큰 0)    │
+│ 세션 페이지                   │               │  3. Claude Code 실행               │
+│  본문 = 대화 기록              │&lt;──────────────┤  4. 결과물 → 구글 드라이브 업로드  │
+│  댓글 = 입력창 / 답장          │&lt;──────────────┤  5. 요약 + 링크를 댓글로 답장       │
+└──────────────────────────────┘               └─────────────────────────────────┘
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>💬 사용하는 방법 (사용자 입장)</h2>
+    <div class="step">
+      <div class="num">1</div>
+      <div class="desc"><b>세션 페이지 열기</b> — "Claude Code" 데이터베이스에서 작업할 세션(페이지)을 하나 고르거나 새로 만듭니다.</div>
+    </div>
+    <div class="step">
+      <div class="num">2</div>
+      <div class="desc"><b>댓글로 요청 작성</b> — 페이지 아래 댓글창에 원하는 작업을 자연어로 적습니다. 예: "이 파일에 로그인 기능 추가해줘"</div>
+    </div>
+    <div class="step">
+      <div class="num">3</div>
+      <div class="desc"><b>15초~수분 대기</b> — 맥미니가 자동으로 댓글을 읽고 Claude Code를 실행합니다. 작업 중에는 상태 아이콘이 🟠로 바뀝니다.</div>
+    </div>
+    <div class="step">
+      <div class="num">4</div>
+      <div class="desc"><b>답장 확인</b> — 같은 댓글 스레드에 요약과 결과물 링크(구글 드라이브)가 달립니다. 완료되면 상태가 🟢로 바뀝니다.</div>
+    </div>
+    <div class="note">⚠️ <b>허용된 사람의 댓글만</b> 처리됩니다. 아무나 댓글을 달아도 무시되니 안심하세요.</div>
+  </div>
+
+  <div class="card">
+    <h2>⚡ 슬래시 명령 (AI를 부르지 않는 빠른 명령)</h2>
+    <p>아래 명령들은 Claude를 실행하지 않고 즉시 처리되어 <b>토큰(비용)이 들지 않습니다.</b></p>
+    <table>
+      <tr><th>명령</th><th>기능</th></tr>
+      <tr><td><span class="tag">/model</span></td><td>opus / fable / sonnet / haiku 중 사용할 AI 모델 변경</td></tr>
+      <tr><td><span class="tag">/effort</span></td><td>low ~ max, 생각을 얼마나 깊게 할지 조절</td></tr>
+      <tr><td><span class="tag">/usage</span></td><td>현재까지 사용량(플랜 한도) 확인</td></tr>
+      <tr><td><span class="tag">/new</span></td><td>대화 새로 시작 (이전 맥락 초기화)</td></tr>
+      <tr><td><span class="tag">/stop</span></td><td>진행 중인 작업 중지</td></tr>
+      <tr><td><span class="tag">/status</span></td><td>현재 세션 상태 확인</td></tr>
+    </table>
+    <p>특정 요청 하나만 다른 모델로 실행하고 싶다면 댓글 맨 앞에 <code>@haiku</code>처럼 붙이면 됩니다.</p>
+  </div>
+
+  <div class="card">
+    <h2>🎨 상태 아이콘 의미</h2>
+    <table>
+      <tr><th>아이콘</th><th>의미</th></tr>
+      <tr><td>🟢</td><td>대기 중 / 완료 — 새 댓글을 기다리고 있음</td></tr>
+      <tr><td>🟠</td><td>작업 진행 중</td></tr>
+      <tr><td>🔴</td><td>오류 발생</td></tr>
+      <tr><td>⏸️</td><td>사용량 한도 도달 — 재설정 시각까지 대기 후 자동 재개</td></tr>
+    </table>
+  </div>
+
+  <div class="card">
+    <h2>🔧 결과물은 어디서 보나요?</h2>
+    <p>Claude가 만든 파일(코드, 문서, 이미지 등)은 자동으로 <b>구글 드라이브</b>에 업로드되고,
+    답장 댓글에 <b>링크 하나</b>로 정리되어 옵니다. 소스 코드가 바뀐 경우 변경 내역(patch)도 같은 폴더에 함께 저장됩니다.</p>
+  </div>
+
+  <div class="card">
+    <h2>🛠 (관리자용) 초기 설정 요약</h2>
+    <p>이 부분은 시스템을 처음 설치·설정하는 사람만 참고하면 됩니다.</p>
+    <div class="step"><div class="num">1</div><div class="desc">노션 integration에서 <b>댓글 읽기/쓰기 권한</b> 켜기 + 세션 DB에 연결</div></div>
+    <div class="step"><div class="num">2</div><div class="desc"><code>rclone config</code>로 구글 드라이브 연결</div></div>
+    <div class="step"><div class="num">3</div><div class="desc">맥미니에서 <code>claude</code> 명령으로 Claude Code 로그인</div></div>
+    <div class="step"><div class="num">4</div><div class="desc"><code>bridge.config.json</code> 설정 후 아래 명령 실행</div></div>
+    <pre>npm run dev -- bridge-setup &lt;세션 DB URL&gt;
+npm run dev -- bridge          # 상시 실행 시작</pre>
+    <p>맥미니를 항상 켜두려면: <code>sudo pmset -a sleep 0 disksleep 0</code></p>
+  </div>
+
+</div>
+
+<footer>notion-bridge-coding · 자동 생성된 사용 설명서</footer>
+
+</body>
+</html>
