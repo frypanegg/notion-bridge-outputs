@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1865" height="432" viewBox="0 0 372.96 86.40" font-family="'Malgun Gothic', '맑은 고딕', 'Apple SD Gothic Neo', sans-serif">
+<rect x="0.00" y="0.00" width="372.96" height="86.40" rx="0" fill="#FFFFFF"/>
+<rect x="7.20" y="7.20" width="57.60" height="72.00" rx="0" fill="#16498A"/>
+<text x="36.00" y="40.92" font-size="9.5" font-weight="bold" fill="#FFFFFF" text-anchor="middle">관리</text>
+<text x="36.00" y="52.32" font-size="9.5" font-weight="bold" fill="#FFFFFF" text-anchor="middle">주체</text>
+<rect x="68.40" y="7.20" width="116.64" height="72.00" rx="0" fill="#F2F4F7" stroke="#BFC7D2" stroke-width="0.75"/>
+<text x="126.72" y="35.10" font-size="7.5" font-weight="bold" fill="#8A94A3" text-anchor="middle">As-Is</text>
+<text x="126.72" y="45.54" font-size="9" fill="#444444" text-anchor="middle">인사부서 주도下</text>
+<text x="126.72" y="56.34" font-size="9" fill="#444444" text-anchor="middle">인력 감축 노력</text>
+<polygon points="187.92,38.16 199.44,38.16 199.44,33.12 209.52,43.20 199.44,53.28 199.44,48.24 187.92,48.24" fill="#E8541E"/>
+<rect x="212.40" y="7.20" width="153.36" height="72.00" rx="0" fill="#EEF3FA" stroke="#1F5FA8" stroke-width="1.25"/>
+<text x="289.08" y="29.40" font-size="7.5" font-weight="bold" fill="#1F5FA8" text-anchor="middle">To-Be</text>
+<text x="289.08" y="40.32" font-size="9.5" font-weight="bold" fill="#0B2D5B" text-anchor="middle">인력운영 부서장 책임경영</text>
+<text x="289.08" y="51.72" font-size="9.5" font-weight="bold" fill="#0B2D5B" text-anchor="middle">적정 노무비 內 자율 운영</text>
+<text x="289.08" y="62.16" font-size="8.5" font-weight="bold" fill="#C2410C" text-anchor="middle">재량·권한·책임 확대</text>
+</svg>
