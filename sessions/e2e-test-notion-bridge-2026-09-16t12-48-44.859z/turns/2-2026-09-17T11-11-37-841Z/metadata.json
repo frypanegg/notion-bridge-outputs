@@ -1,0 +1,9 @@
+{
+  "session": "[E2E TEST] Notion Bridge 2026-09-16T12:48:44.859Z",
+  "turn": 2,
+  "date": "2026-09-17T11:11:37.841Z",
+  "summary": "Codex 경로가 정상 동작합니다.",
+  "files": [
+    "changes.patch"
+  ]
+}
