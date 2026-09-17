@@ -1,0 +1,15 @@
+{
+  "turn": 1,
+  "dir": "0001-20260917-2",
+  "createdAt": "2026-09-17T11:10:00.689Z",
+  "model": "gpt-5.6-sol",
+  "request": "안녕하십니까? 주말 날씨 txt 파일로 만들어줘\n\n안녕? 대답해",
+  "summary": "There's an issue with the selected model (gpt-5.6-sol). It may not exist or you may not have access to it. Run --model to pick a different model.",
+  "files": [
+    {
+      "path": "오늘_날씨.txt",
+      "size": 734
+    }
+  ],
+  "hasPatch": false
+}
