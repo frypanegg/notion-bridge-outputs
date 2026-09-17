@@ -1,0 +1,10 @@
+{
+  "session": "[E2E TEST] Notion Bridge 2026-09-16T12:43:27.960Z",
+  "turn": 4,
+  "date": "2026-09-17T11:10:07.282Z",
+  "summary": "안녕하세요! 서울 기준 이번 주말(2026년 9월 19~20일) 날씨를 TXT 파일로 만들었습니다. 토·일 모두 맑고, 기온은 18~29°C로 예보됐습니다.",
+  "files": [
+    "weekend_weather.txt",
+    "changes.patch"
+  ]
+}
